@@ -38,7 +38,7 @@ class OAuth implements Authentication
      *
      * @param \Requests_Hooks $hooks Hook system
      */
-    public function register(Requests_Hooks &$hooks)
+    public function register(Requests_Hooks $hooks)
     {
         $hooks->register('requests.before_request', [&$this, 'before_request']);
     }
@@ -54,6 +54,6 @@ class OAuth implements Authentication
      */
     public function before_request(&$url, &$headers, &$data, &$type, &$options)
     {
-        $headers['Authorization'] = 'OAuth '.$this->accessToken;
+        $headers['Authorization'] = 'OAuth ' . $this->accessToken;
     }
 }

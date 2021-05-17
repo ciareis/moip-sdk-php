@@ -189,11 +189,22 @@ class Connect implements Authentication, JsonSerializable
     {
         if (function_exists('posix_uname')) {
             $uname = posix_uname();
-            $user_agent = sprintf('Mozilla/4.0 (compatible; %s; PHP/%s %s; %s; %s)',
-                Moip::CLIENT, PHP_SAPI, PHP_VERSION, $uname['sysname'], $uname['machine']);
+            $user_agent = sprintf(
+                'Mozilla/4.0 (compatible; %s; PHP/%s %s; %s; %s)',
+                Moip::CLIENT,
+                PHP_SAPI,
+                PHP_VERSION,
+                $uname['sysname'],
+                $uname['machine']
+            );
         } else {
-            $user_agent = sprintf('Mozilla/4.0 (compatible; %s; PHP/%s %s; %s)',
-                Moip::CLIENT, PHP_SAPI, PHP_VERSION, PHP_OS);
+            $user_agent = sprintf(
+                'Mozilla/4.0 (compatible; %s; PHP/%s %s; %s)',
+                Moip::CLIENT,
+                PHP_SAPI,
+                PHP_VERSION,
+                PHP_OS
+            );
         }
         $sess = new Requests_Session($this->endpoint);
         $sess->options['timeout'] = $timeout;
@@ -222,7 +233,7 @@ class Connect implements Authentication, JsonSerializable
             'scope'         => implode(',', $this->scope),
         ];
 
-        return $this->endpoint.self::OAUTH_AUTHORIZE.'?'.http_build_query($query_string);
+        return $this->endpoint . self::OAUTH_AUTHORIZE . '?' . http_build_query($query_string);
     }
 
     /**
@@ -232,7 +243,7 @@ class Connect implements Authentication, JsonSerializable
      */
     public function authorize()
     {
-        $path = $this->endpoint.self::OAUTH_TOKEN;
+        $path = $this->endpoint . self::OAUTH_TOKEN;
         $headers = ['Content-Type' => 'application/x-www-form-urlencoded'];
         $body = [
             'client_id'     => $this->client_id,
@@ -265,7 +276,7 @@ class Connect implements Authentication, JsonSerializable
     public function setScodeAll($scope)
     {
         if (!is_bool($scope)) {
-            throw new InvalidArgumentException('$scope deve ser boolean, foi passado '.gettype($scope));
+            throw new InvalidArgumentException('$scope deve ser boolean, foi passado ' . gettype($scope));
         }
 
         if ($scope === false) {
@@ -295,7 +306,7 @@ class Connect implements Authentication, JsonSerializable
     public function setReceiveFunds($receive_funds)
     {
         if (!is_bool($receive_funds)) {
-            throw new InvalidArgumentException('$receive_funds deve ser boolean, foi passado '.gettype($receive_funds));
+            throw new InvalidArgumentException('$receive_funds deve ser boolean, foi passado ' . gettype($receive_funds));
         }
 
         if ($receive_funds === true) {
@@ -317,7 +328,7 @@ class Connect implements Authentication, JsonSerializable
     public function setRefund($refund)
     {
         if (!is_bool($refund)) {
-            throw new InvalidArgumentException('$refund deve ser boolean, foi passado '.gettype($refund));
+            throw new InvalidArgumentException('$refund deve ser boolean, foi passado ' . gettype($refund));
         }
 
         if ($refund === true) {
@@ -339,7 +350,7 @@ class Connect implements Authentication, JsonSerializable
     public function setManageAccountInfo($manage_account_info)
     {
         if (!is_bool($manage_account_info)) {
-            throw new InvalidArgumentException('$manage_account_info deve ser boolean, foi passado '.gettype($manage_account_info));
+            throw new InvalidArgumentException('$manage_account_info deve ser boolean, foi passado ' . gettype($manage_account_info));
         }
 
         if ($manage_account_info === true) {
@@ -361,7 +372,7 @@ class Connect implements Authentication, JsonSerializable
     public function setRetrieveFinancialInfo($retrieve_financial_info)
     {
         if (!is_bool($retrieve_financial_info)) {
-            throw new InvalidArgumentException('$retrieve_financial_info deve ser boolean, foi passado '.gettype($retrieve_financial_info));
+            throw new InvalidArgumentException('$retrieve_financial_info deve ser boolean, foi passado ' . gettype($retrieve_financial_info));
         }
 
         if ($retrieve_financial_info === true) {
@@ -383,7 +394,7 @@ class Connect implements Authentication, JsonSerializable
     public function setTransferFunds($transfer_funds)
     {
         if (!is_bool($transfer_funds)) {
-            throw new InvalidArgumentException('$transfer_funds deve ser boolean, foi passado '.gettype($transfer_funds));
+            throw new InvalidArgumentException('$transfer_funds deve ser boolean, foi passado ' . gettype($transfer_funds));
         }
 
         if ($transfer_funds === true) {
@@ -405,7 +416,7 @@ class Connect implements Authentication, JsonSerializable
     public function setDefinePreferences($define_preferences)
     {
         if (!is_bool($define_preferences)) {
-            throw new InvalidArgumentException('$define_preferences deve ser boolean, foi passado '.gettype($define_preferences));
+            throw new InvalidArgumentException('$define_preferences deve ser boolean, foi passado ' . gettype($define_preferences));
         }
 
         if ($define_preferences === true) {
@@ -562,7 +573,7 @@ class Connect implements Authentication, JsonSerializable
      *
      * @param Requests_Hooks $hooks Hook system
      */
-    public function register(Requests_Hooks &$hooks)
+    public function register(Requests_Hooks $hooks)
     {
         // TODO: Implement register() method.
     }
